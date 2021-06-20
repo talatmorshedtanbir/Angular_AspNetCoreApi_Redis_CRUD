@@ -1,58 +1,43 @@
-<!-- <div>
-    <table>
+<h2 align="center">Employee Table</h2>
+<table mat-table  [dataSource]="employees" class="mat-elevation-z8 demo-table">
+    <!-- Position Column -->
 
-        <caption><h2>Employee Information Table</h2></caption>
-        <thead>
-            <tr>
-                <th>User Name</th>
-                <th>Name</th>
-                <th>Salary</th>
-                <th>Mobile No</th>
-                <th>Commands</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let employee of employees"> 
-                <td>{{ employee.userName | uppercase }}</td>
-                <td>{{ employee.name }}</td>
-                <td>{{ employee.salary }}</td>
-                <td>{{ employee.mobileNumber }}</td>
-                <td>
-                    <a href="#" (click)="editRecord(this)" mat-raised-button>Edit</a>
-                    <a href="#" (click)="deleteRecord(this)">Delete</a>
-        
-                </td>
-            </tr>
-        </tbody>
-        </table>        
-</div> -->
-
-<mat-table [dataSource]="employees" class="mat-elevation-z8">
-  
     <ng-container matColumnDef="name">
-        <div *matHeaderCellDef>Name</div>
-        <div *matCellDef="let lesson">{{lesson.name}}</div>
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
   
+    <!-- Name Column -->
     <ng-container matColumnDef="userName">
-        <div *matHeaderCellDef>UserName</div>
-        <div class="description-cell"
-                  *matCellDef="let lesson">{{lesson.userName}}</div>
+      <th mat-header-cell *matHeaderCellDef> User Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
     </ng-container>
   
+    <!-- Weight Column -->
     <ng-container matColumnDef="salary">
-        <div *matHeaderCellDef>Salary</div>
-        <div class="duration-cell"
-                  *matCellDef="let lesson">{{lesson.salary}}</div>
+      <th mat-header-cell *matHeaderCellDef> Salary </th>
+      <td mat-cell *matCellDef="let element"> {{element.salary}} </td>
     </ng-container>
+  
+    <!-- Symbol Column -->
     <ng-container matColumnDef="mobileNumber">
-        <div *matHeaderCellDef>Mobile No</div>
-        <div class="duration-cell"
-                  *matCellDef="let lesson">{{lesson.mobileNumber}}</div>
+      <th mat-header-cell *matHeaderCellDef> Mobile No </th>
+      <td mat-cell *matCellDef="let element"> {{element.mobileNumber}} </td>
     </ng-container>
-    
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    
-    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-    
-</mat-table>
+
+    <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef> Options </th>
+        <td mat-cell *matCellDef="let element"> 
+            <a href="#" mat-raised-button color="primary" (click)="editRecord(this)">Edit</a>
+            <a href="#" mat-raised-button color="accent" (click)="deleteRecord(element)">Delete</a> </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+<router-outlet></router-outlet>
+<div>
+    <app-addupdate (employeeCreated)="createUpdateEmployee($event)" [employee]="currentEmployee"></app-addupdate>
+  </div>

@@ -33,7 +33,7 @@ namespace RedisCRUDPractice.DataAccessLayers
 
         public async Task AddEmployee(Employee employee)
         {
-            if (await _redisCache.GetStringAsync(employee.UserName) == null)
+            if ((await _redisCache.GetStringAsync(employee.UserName) == null) && employee.UserName != "")
             {
                 await _redisCache.SetStringAsync(employee.UserName, JsonConvert.SerializeObject(employee));
             }
@@ -55,7 +55,7 @@ namespace RedisCRUDPractice.DataAccessLayers
         {
             if (await _redisCache.GetStringAsync(userName) != null)
             {
-                await _redisCache.RemoveAsync(userName);
+                await _redisCache.RemoveAsync("");
             }
             else
                 throw new Exception("Data not found");        

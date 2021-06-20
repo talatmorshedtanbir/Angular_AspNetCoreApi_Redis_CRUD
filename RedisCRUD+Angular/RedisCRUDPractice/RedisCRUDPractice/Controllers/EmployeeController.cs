@@ -106,7 +106,7 @@ namespace RedisCRUDPractice.Controllers
             }
         }
 
-        [HttpDelete("DeleteEmployee")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteEmployee(string userName)
         {
             try

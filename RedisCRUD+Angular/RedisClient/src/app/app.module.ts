@@ -7,18 +7,22 @@ import { AppComponent } from './app.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { DataService } from './data.service';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { AddupdateComponent } from './addupdate/addupdate.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    AddupdateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonModule
   ],
   exports: [],
   providers: [

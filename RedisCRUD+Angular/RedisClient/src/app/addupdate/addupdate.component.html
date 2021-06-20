@@ -1,0 +1,23 @@
+<div>
+    <h2 *ngIf="!employee || employee.id === 0">Add Employee</h2>
+    <h2 *ngIf="employee && employee.id !== 0">Update Employee</h2>
+    <form>
+      <div class="form-group">
+        <label for="name-input">Name:</label>
+        <input name="name" type="text" id="name" [(ngModel)]="employee.name" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="userName-input">User Name:</label>
+        <textarea name="userName" type="text" id="userName" [(ngModel)]="employee.userName" class="form-control" ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="mobileNumber-input">Mobile No:</label>
+        <textarea name="mobileNumber" type="number" id="mobileNumber" [(ngModel)]="employee.mobileNumber" class="form-control" ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="salary-input">Salary:</label>
+        <textarea name="salary" type="number" id="salary" [(ngModel)]="employee.salary" class="form-control" ></textarea>
+      </div>
+      <button type="button" class="btn btn-primary" (click)="addUpdateNote(employee);">Save</button>
+    </form>
+  </div>

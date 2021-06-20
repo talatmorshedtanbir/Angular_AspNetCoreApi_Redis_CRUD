@@ -22,7 +22,7 @@ export class DataService {
   }
 
   public remove(payload) {
-    return this.http.delete(this.accessPointUrl + '/' + payload.id, {headers: this.headers});
+    return this.http.delete(this.accessPointUrl + '/?userName=' + payload.userName, {headers: this.headers});
   }
 
   public update(payload) {
