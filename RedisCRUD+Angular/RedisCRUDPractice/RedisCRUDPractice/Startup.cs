@@ -32,6 +32,7 @@ namespace RedisCRUDPractice
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors();
 
             services.AddScoped<IEmployeeDAL, EmployeeDAL>();
             services.AddScoped<IEmployeeService, EmployeeService>();
@@ -52,6 +53,10 @@ namespace RedisCRUDPractice
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
