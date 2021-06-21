@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Employee } from './employee';
 import * as _ from 'lodash';
@@ -11,13 +11,16 @@ export class EmployeeComponent implements OnInit {
 
   employees : Array<Employee>= [];
   currentEmployee: any;
+
   constructor (private dataService: DataService) {
-    this.fetchData();
   }
    dataSource = this.employees;
   ngOnInit(): void {
-
+    this.fetchData();
   }
+  ngOnChanges() {
+}   
+
   displayedColumns = ["name", "userName", "salary", "mobileNumber", "options"];
   editRecord(arg){
     console.log(arg.employees[0].id);
@@ -35,35 +38,5 @@ export class EmployeeComponent implements OnInit {
 
   fetchData(){
     this.dataService.get().subscribe((data: any) => this.employees = data.data);
-  }
-
-  createUpdateEmployee  (employee: any) {
-    employee.salary = parseInt(employee.salary);
-    let employeeWithId = _.find(this.employees, (el => el.id === employee.id));
-    if (employeeWithId) {
-      const updateIndex = _.findIndex(this.employees, { id: employeeWithId.id });
-      this.dataService.update(employee).subscribe(
-        result => this.employees.splice(updateIndex, 1, employee)
-      );
-    } else {
-      this.dataService.add(employee).subscribe(       
-        employeeRecord => {
-          employee.id = employeeRecord;
-          this.employees.push(employee)
-        }
-      );
-      console.log(employee);
-    }
-    this.currentEmployee = this.getDefaultEmployee();
-  };
-
-  getDefaultEmployee(){
-    return {
-      id: 0,
-      name: '',
-      userName: '',
-      salary: 0,
-      mobileNumber: ''
-    };
   }
 }

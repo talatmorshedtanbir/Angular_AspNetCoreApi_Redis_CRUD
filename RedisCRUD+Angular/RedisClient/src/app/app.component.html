@@ -1,2 +1,3 @@
-<app-employee></app-employee>
+<app-employee ></app-employee>
+<app-addupdate (employeeCreated)="createUpdateEmployee($event)" [employee]="currentEmployee"></app-addupdate>
 <router-outlet></router-outlet>
