@@ -55,7 +55,7 @@ namespace RedisCRUDPractice.DataAccessLayers
         {
             if (await _redisCache.GetStringAsync(userName) != null)
             {
-                await _redisCache.RemoveAsync("");
+                await _redisCache.RemoveAsync(userName);
             }
             else
                 throw new Exception("Data not found");        

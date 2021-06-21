@@ -12,11 +12,11 @@ export class EmployeeComponent implements OnInit {
   employees : Array<Employee>= [];
   currentEmployee: any;
   constructor (private dataService: DataService) {
-    
+    this.fetchData();
   }
    dataSource = this.employees;
   ngOnInit(): void {
-    this.fetchData();
+
   }
   displayedColumns = ["name", "userName", "salary", "mobileNumber", "options"];
   editRecord(arg){
