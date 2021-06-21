@@ -133,7 +133,7 @@ namespace RedisCRUDPractice.Controllers
             }
         }
 
-        [HttpPut("updateemployee")]
+        [HttpPut]
         public async Task<IActionResult> Update([FromBody] Employee employee)
         {
             try

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DataService } from './data.service';
 import { Employee } from './employee/employee';
 import * as _ from 'lodash';
@@ -10,17 +10,23 @@ import * as _ from 'lodash';
 export class AppComponent implements OnInit{
   employees : Array<Employee>= [];
   currentEmployee : Employee = this.getDefaultEmployee();
+
   title = 'RedisClient';
   constructor (private dataService: DataService) {
   }
+
   ngOnInit(){
+    this.fetchData();
   }
+
   createUpdateEmployee  (employee: any) {
+    let tempId = employee.id;
     employee.id = Math.floor(Math.random() * 100) 
     employee.salary = parseInt(employee.salary);
-    let employeeWithId = _.find(this.employees, (el => el.id === employee.id));
+    let employeeWithId = _.find(this.employees, (el => el.id === tempId));
     if (employeeWithId) {
-      const updateIndex = _.findIndex(this.employees, { id: employeeWithId.id });
+      employee.id = tempId;
+      const updateIndex = _.findIndex(this.employees, { id: tempId });
       this.dataService.update(employee).subscribe(
         result => this.employees.splice(updateIndex, 1, employee)
       );
@@ -35,6 +41,14 @@ export class AppComponent implements OnInit{
     this.currentEmployee = this.getDefaultEmployee();
     window.location.reload();
   };
+
+  updateEmployeeData(data){
+    this.currentEmployee = data;
+  }
+
+  fetchData(){
+    this.dataService.get().subscribe((data: any) => this.employees = data.data);
+  }
 
   getDefaultEmployee(){
     return {

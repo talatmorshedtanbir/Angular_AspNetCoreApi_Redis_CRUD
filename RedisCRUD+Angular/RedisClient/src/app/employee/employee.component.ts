@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { DataService } from '../data.service';
 import { Employee } from './employee';
 import * as _ from 'lodash';
@@ -9,25 +9,26 @@ import * as _ from 'lodash';
 })
 export class EmployeeComponent implements OnInit {
 
-  employees : Array<Employee>= [];
-  currentEmployee: any;
-
+  employees : Array<Employee>= [];;
+  @Output() employeeEdited = new EventEmitter<any>();
+  dataSource = this.employees;
   constructor (private dataService: DataService) {
   }
-   dataSource = this.employees;
+
   ngOnInit(): void {
     this.fetchData();
   }
+
   ngOnChanges() {
 }   
 
   displayedColumns = ["name", "userName", "salary", "mobileNumber", "options"];
-  editRecord(arg){
-    console.log(arg.employees[0].id);
+
+  public editRecord(record) {
+    this.employeeEdited.emit(record);
   }
 
   deleteRecord(employee){
-    console.log(employee)
     const deleteIndex = _.findIndex(this.employees, { userName: employee.userName });
     this.dataService.remove(employee).subscribe(
       result => {this.employees.splice(deleteIndex, 1);

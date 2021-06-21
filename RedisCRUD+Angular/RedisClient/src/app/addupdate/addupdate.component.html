@@ -8,7 +8,8 @@
       </div>
       <div class="form-group">
         <label for="userName-input">User Name:</label>
-        <textarea name="userName" type="text" id="userName" [(ngModel)]="employee.userName" class="form-control" ></textarea>
+        <textarea *ngIf="employee && employee.id !== 0" disabled name="userName" type="text" id="userName" [(ngModel)]="employee.userName" class="form-control" ></textarea>
+        <textarea *ngIf="!employee || employee.id === 0" name="userName" type="text" id="userName" [(ngModel)]="employee.userName" class="form-control" ></textarea>
       </div>
       <div class="form-group">
         <label for="mobileNumber-input">Mobile No:</label>

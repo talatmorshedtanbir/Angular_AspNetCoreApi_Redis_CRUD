@@ -1,4 +1,4 @@
-<app-employee ></app-employee>
+<app-employee (employeeEdited)="updateEmployeeData($event)"></app-employee>
 <br>
 <app-addupdate (employeeCreated)="createUpdateEmployee($event)" [employee]="currentEmployee"></app-addupdate>
 <router-outlet></router-outlet>

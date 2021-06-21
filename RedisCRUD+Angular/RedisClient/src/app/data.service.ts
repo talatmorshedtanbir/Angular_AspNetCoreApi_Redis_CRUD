@@ -26,6 +26,6 @@ export class DataService {
   }
 
   public update(payload) {
-    return this.http.put(this.accessPointUrl + '/' + payload.id, payload, {headers: this.headers});
+    return this.http.put(this.accessPointUrl, payload, {headers: this.headers});
   }
 }

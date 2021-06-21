@@ -13,20 +13,18 @@ export class AddupdateComponent implements OnInit {
   constructor() { 
     this.clearEmployee();
     this.employee = {
-      id: 4440,
+      id:Math.floor(Math.random() * 100),
       name: "",
       userName: "",
       salary: 0,
       mobileNumber: ''
     };
-    
   }
 
   ngOnInit(): void {
   }
   // Create an empty note object
   clearEmployee() {
-    console.log("res");
     this.employee = {
       id: Math.random(),
       name: "",
@@ -35,8 +33,9 @@ export class AddupdateComponent implements OnInit {
       mobileNumber: ''
     };
   };
+
   addUpdateEmployee (emp) {
-    this.employeeCreated.emit(this.employee);
+    this.employeeCreated.emit(emp);
     this.clearEmployee();
   };
 }
